@@ -20,7 +20,7 @@ struct bottleAnimation{
 }
 
 struct OrangeView: View {
-    @State var starAnimation = false
+    @Binding var starAnimation: Bool
     
     var body: some View {
         GeometryReader { proxy in
@@ -48,6 +48,7 @@ struct OrangeView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.2, y:contentSize.height * 0.8, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
@@ -68,6 +69,7 @@ struct OrangeView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.55)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x: contentSize.width * 0.7, y: contentSize.height * 0.15, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
@@ -93,6 +95,7 @@ struct OrangeView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.3, y:0, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
@@ -119,6 +122,7 @@ struct OrangeView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x:contentSize.width * 0.68, y:contentSize.height * 0.82, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
@@ -144,6 +148,7 @@ struct OrangeView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.7)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.4, y:contentSize.height * 0.4, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
@@ -171,6 +176,7 @@ struct OrangeView: View {
                             .resizable()
                             .scaledToFit()
                             .offset(x:9)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: bottleAnimation(y: 0, scale: 0.2,opacity: 0), trigger: starAnimation) { content, value in
                                 content
                                     .opacity(value.opacity)
@@ -197,10 +203,6 @@ struct OrangeView: View {
                     }
                 }
                 .frame(width: size.width, height: size.height * 0.85)
-                .onAppear {
-                    starAnimation = true
-                }
-//                .background(Rectangle().stroke())
                 
             }
         }
@@ -210,5 +212,5 @@ struct OrangeView: View {
 }
 
 #Preview {
-    OrangeView()
+    OrangeView( starAnimation: .constant(false))
 }
