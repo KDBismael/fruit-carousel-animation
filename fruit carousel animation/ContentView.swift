@@ -25,20 +25,8 @@ struct ContentView: View {
                 ScrollView(.horizontal) {
                     HStack(spacing:0){
                         ZStack {
-                            OrangeView(starAnimation: $startYellowAnimation, showFruits: $showYellow)
+                            OrangeView(starAnimation: $startYellowAnimation, showFruits: $showYellow,bgColor: .constant(0xFFD847), bottle: .constant("yellow"), images: .constant(["orange-1","image 1","orange-2","orange-3","orange"]))
                                 .frame(width: proxy.size.width)
-                                .background(
-                                    GeometryReader { innerProxy in
-                                        Color.clear
-                                            .onChange(of: innerProxy.frame(in: .global).minX) {_, minX in
-                                                //                                            let value = detectVisibility(minX: minX, width: proxy.size.width)
-                                                let minX = innerProxy.frame(in: .global).minX
-                                                //                                            if minX <= 390 && minX > 0 {
-                                                //                                                showGreen = true
-                                                //                                            }
-                                            }
-                                    }
-                                )
                                 .onScrollVisibilityChange { val in
                                     startYellowAnimation = val
                                     showYellow = val
@@ -47,7 +35,7 @@ struct ContentView: View {
                         .zIndex(showYellow ? 1:0)
                         
                         ZStack {
-                            OrangeView(starAnimation: $startGreenAnimation, showFruits: $showGreen)
+                            OrangeView(starAnimation: $startGreenAnimation, showFruits: $showGreen, bgColor: .constant(0x8EC648), bottle: .constant("green"), images: .constant(["pngwing 2","pngwing 1","pngwing 3-1","pngwing 4","pngwing 3"]) )
                                 .frame(width: proxy.size.width)
                                 .background(
                                     GeometryReader { innerProxy in
@@ -103,7 +91,7 @@ struct ContentView: View {
                         .zIndex(showGreen ? 1:0)
                         
                         ZStack {
-                            OrangeView(starAnimation: $startPurpleAnimation, showFruits: $showPurple)
+                            OrangeView(starAnimation: $startPurpleAnimation, showFruits: $showPurple, bgColor: .constant(0x6848C6), bottle: .constant("purple"), images: .constant(["pngwing 8","bbary 1","pngwing 5","pngwing 7","pngwing 6"]) )
                                 .frame(width: proxy.size.width)
                                 .onScrollVisibilityChange { val in
                                     startPurpleAnimation = val

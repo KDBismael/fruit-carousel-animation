@@ -22,6 +22,9 @@ struct bottleAnimation{
 struct OrangeView: View {
     @Binding var starAnimation: Bool
     @Binding var showFruits: Bool
+    @Binding var bgColor: UInt
+    @Binding var bottle: String
+    @Binding var images:[String]
     
     var body: some View {
         GeometryReader { proxy in
@@ -33,7 +36,7 @@ struct OrangeView: View {
                     Spacer()
                 }
                 .frame(width: size.width, height: size.height)
-                .background(Color(hex: 0xFFD847))
+                .background(Color(hex: bgColor))
                 
                 Rectangle()
                     .fill(.white.opacity(0.4))
@@ -44,14 +47,14 @@ struct OrangeView: View {
                     GeometryReader { proxy in
                         let contentSize = proxy.size
                         
-                        Image("orange-2")
+                        Image(images[2])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
                             .offset(x: -contentSize.width * 0.2, y: contentSize.height * 0.8)
                             .opacity(showFruits && !starAnimation ? 1 : 0)
                         
-                        Image("orange-2")
+                        Image(images[2])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
@@ -71,14 +74,14 @@ struct OrangeView: View {
                                 }
                             }
                         
-                        Image("orange")
+                        Image(images[4])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.55)
                             .offset(x: contentSize.width * 0.7, y: contentSize.height * 0.15)
                             .opacity(showFruits && !starAnimation ? 1 : 0)
                         
-                        Image("orange")
+                        Image(images[4])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.55)
@@ -103,14 +106,14 @@ struct OrangeView: View {
                                 }
                             }
                         
-                        Image("orange-1")
+                        Image(images[0])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
                             .offset(x: -contentSize.width * 0.3, y: 0)
                             .opacity(showFruits && !starAnimation ? 1 : 0)
                         
-                        Image("orange-1")
+                        Image(images[0])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
@@ -136,14 +139,14 @@ struct OrangeView: View {
                             }
                         
                         
-                        Image("orange-3")
+                        Image(images[3])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
                             .offset(x: contentSize.width * 0.68, y: contentSize.height * 0.82)
                             .opacity(showFruits && !starAnimation ? 1 : 0)
                         
-                        Image("orange-3")
+                        Image(images[3])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
@@ -167,14 +170,14 @@ struct OrangeView: View {
                                     LinearKeyframe(0.7, duration: 0.3, timingCurve: .easeIn)
                                 }
                             }
-                        Image("image 1")
+                        Image(images[1])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.7)
                             .offset(x: -contentSize.width * 0.4, y: contentSize.height * 0.4)
                             .opacity(showFruits && !starAnimation ? 1 : 0)
                         
-                        Image("image 1")
+                        Image(images[1])
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.7)
@@ -202,7 +205,7 @@ struct OrangeView: View {
                         
                         
                         
-                        Image("yellow")
+                        Image(bottle)
                             .resizable()
                             .scaledToFit()
                             .offset(x:9)
@@ -242,5 +245,5 @@ struct OrangeView: View {
 }
 
 #Preview {
-    OrangeView( starAnimation: .constant(false), showFruits: .constant(true))
+    OrangeView( starAnimation: .constant(false), showFruits: .constant(true),bgColor: .constant(0xFFD847), bottle: .constant("yellow"), images: .constant(["orange-1","image 1","orange-2","orange-3","orange"]))
 }
