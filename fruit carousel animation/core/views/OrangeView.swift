@@ -44,12 +44,18 @@ struct OrangeView: View {
                     GeometryReader { proxy in
                         let contentSize = proxy.size
                         
+                        Image("orange-2")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: contentSize.width * 0.6)
+                            .offset(x: -contentSize.width * 0.2, y: contentSize.height * 0.8)
+                            .opacity(showFruits && !starAnimation ? 1 : 0)
                         
                         Image("orange-2")
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
-                            .opacity(showFruits ? 1 : 0)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.2, y:contentSize.height * 0.8, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
@@ -65,12 +71,18 @@ struct OrangeView: View {
                                 }
                             }
                         
+                        Image("orange")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: contentSize.width * 0.55)
+                            .offset(x: contentSize.width * 0.7, y: contentSize.height * 0.15)
+                            .opacity(showFruits && !starAnimation ? 1 : 0)
                         
                         Image("orange")
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.55)
-                            .opacity(showFruits ? 1 : 0)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x: contentSize.width * 0.7, y: contentSize.height * 0.15, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
@@ -91,12 +103,18 @@ struct OrangeView: View {
                                 }
                             }
                         
+                        Image("orange-1")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: contentSize.width * 0.6)
+                            .offset(x: -contentSize.width * 0.3, y: 0)
+                            .opacity(showFruits && !starAnimation ? 1 : 0)
                         
                         Image("orange-1")
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
-                            .opacity(showFruits ? 1 : 0)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.3, y:0, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
@@ -118,16 +136,21 @@ struct OrangeView: View {
                             }
                         
                         
+                        Image("orange-3")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: contentSize.width * 0.6)
+                            .offset(x: contentSize.width * 0.68, y: contentSize.height * 0.82)
+                            .opacity(showFruits && !starAnimation ? 1 : 0)
                         
                         Image("orange-3")
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
-                            .opacity(showFruits ? 1 : 0)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x:contentSize.width * 0.68, y:contentSize.height * 0.82, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
-                                    .scaleEffect(value.scale)
                                     .scaleEffect(value.scale)
                             } keyframes: { _ in
                                 KeyframeTrack(\.x) {
@@ -144,12 +167,18 @@ struct OrangeView: View {
                                     LinearKeyframe(0.7, duration: 0.3, timingCurve: .easeIn)
                                 }
                             }
+                        Image("image 1")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: contentSize.width * 0.7)
+                            .offset(x: -contentSize.width * 0.4, y: contentSize.height * 0.4)
+                            .opacity(showFruits && !starAnimation ? 1 : 0)
                         
                         Image("image 1")
                             .resizable()
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.7)
-                            .opacity(showFruits ? 1 : 0)
+                            .opacity(starAnimation ? 1 : 0)
                             .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.4, y:contentSize.height * 0.4, scale: 1) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
