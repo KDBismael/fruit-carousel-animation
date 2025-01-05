@@ -11,6 +11,7 @@ struct animationValues{
     var x: CGFloat
     var y: CGFloat
     var scale: CGFloat
+    var opacity: CGFloat
 }
 
 struct bottleAnimation{
@@ -22,7 +23,6 @@ struct bottleAnimation{
 struct OrangeView: View {
     @Binding var starAnimation: Bool
     @Binding var showFruits: Bool
-    @Binding var bgColor: UInt
     @Binding var bottle: String
     @Binding var images:[String]
     
@@ -32,11 +32,9 @@ struct OrangeView: View {
             
             ZStack(alignment: .bottom) {
                 VStack{
-                    HeaderView()
                     Spacer()
                 }
                 .frame(width: size.width, height: size.height)
-                .background(Color(hex: bgColor))
                 
                 Rectangle()
                     .fill(.white.opacity(0.4))
@@ -59,18 +57,24 @@ struct OrangeView: View {
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
                             .opacity(starAnimation ? 1 : 0)
-                            .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.2, y:contentSize.height * 0.8, scale: 1) , trigger: starAnimation) { content, value in
+                            .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.2, y:contentSize.height * 0.8, scale: 1, opacity:0) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
+                                    .opacity(value.opacity)
                             } keyframes: { _ in
                                 KeyframeTrack(\.x) {
                                     LinearKeyframe(-contentSize.width * 0.2, duration: 1)
-                                    LinearKeyframe(contentSize.width * 0.2, duration: 0.3, timingCurve: .easeIn)
+                                    LinearKeyframe(contentSize.width * 0.25, duration: 0.3, timingCurve: .easeIn)
                                 }
 
                                 KeyframeTrack(\.y){
                                     LinearKeyframe(contentSize.height * 0.8, duration: 1)
                                     LinearKeyframe(contentSize.height * 0.3, duration: 0.3, timingCurve: .easeIn)
+                                }
+                                KeyframeTrack(\.opacity) {
+                                    MoveKeyframe(1)
+                                    LinearKeyframe(1, duration: 1.2)
+                                    MoveKeyframe(0)
                                 }
                             }
                         
@@ -86,10 +90,11 @@ struct OrangeView: View {
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.55)
                             .opacity(starAnimation ? 1 : 0)
-                            .keyframeAnimator(initialValue: animationValues(x: contentSize.width * 0.7, y: contentSize.height * 0.15, scale: 1) , trigger: starAnimation) { content, value in
+                            .keyframeAnimator(initialValue: animationValues(x: contentSize.width * 0.7, y: contentSize.height * 0.15, scale: 1, opacity:0) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
                                     .scaleEffect(value.scale)
+                                    .opacity(value.opacity)
                             } keyframes: { _ in
                                 KeyframeTrack(\.x) {
                                     LinearKeyframe(contentSize.width * 0.7, duration: 1)
@@ -102,7 +107,12 @@ struct OrangeView: View {
                                 }
                                 KeyframeTrack(\.scale){
                                     LinearKeyframe(1, duration: 1)
-                                    LinearKeyframe(0.7, duration: 0.3, timingCurve: .easeIn)
+                                    LinearKeyframe(0.6, duration: 0.3, timingCurve: .easeIn)
+                                }
+                                KeyframeTrack(\.opacity) {
+                                    MoveKeyframe(1)
+                                    LinearKeyframe(1, duration: 1.2)
+                                    MoveKeyframe(0)
                                 }
                             }
                         
@@ -118,10 +128,11 @@ struct OrangeView: View {
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
                             .opacity(starAnimation ? 1 : 0)
-                            .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.3, y:0, scale: 1) , trigger: starAnimation) { content, value in
+                            .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.3, y:0, scale: 1, opacity:0) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
                                     .scaleEffect(value.scale)
+                                    .opacity(value.opacity)
                             } keyframes: { _ in
                                 KeyframeTrack(\.x) {
                                     LinearKeyframe(-contentSize.width * 0.3, duration: 1)
@@ -135,6 +146,11 @@ struct OrangeView: View {
                                 KeyframeTrack(\.scale){
                                     LinearKeyframe(1, duration: 1)
                                     LinearKeyframe(0.75, duration: 0.3, timingCurve: .easeIn)
+                                }
+                                KeyframeTrack(\.opacity) {
+                                    MoveKeyframe(1)
+                                    LinearKeyframe(1, duration: 1.2)
+                                    MoveKeyframe(0)
                                 }
                             }
                         
@@ -151,10 +167,11 @@ struct OrangeView: View {
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.6)
                             .opacity(starAnimation ? 1 : 0)
-                            .keyframeAnimator(initialValue: animationValues(x:contentSize.width * 0.68, y:contentSize.height * 0.82, scale: 1) , trigger: starAnimation) { content, value in
+                            .keyframeAnimator(initialValue: animationValues(x:contentSize.width * 0.68, y:contentSize.height * 0.82, scale: 1, opacity: 0) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
                                     .scaleEffect(value.scale)
+                                    .opacity(value.opacity)
                             } keyframes: { _ in
                                 KeyframeTrack(\.x) {
                                     LinearKeyframe(contentSize.width * 0.68, duration: 1)
@@ -169,6 +186,11 @@ struct OrangeView: View {
                                     LinearKeyframe(1, duration: 1)
                                     LinearKeyframe(0.7, duration: 0.3, timingCurve: .easeIn)
                                 }
+                                KeyframeTrack(\.opacity) {
+                                    MoveKeyframe(1)
+                                    LinearKeyframe(1, duration: 1.2)
+                                    MoveKeyframe(0)
+                                }
                             }
                         Image(images[1])
                             .resizable()
@@ -182,14 +204,15 @@ struct OrangeView: View {
                             .scaledToFit()
                             .frame(width: contentSize.width * 0.7)
                             .opacity(starAnimation ? 1 : 0)
-                            .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.4, y:contentSize.height * 0.4, scale: 1) , trigger: starAnimation) { content, value in
+                            .keyframeAnimator(initialValue: animationValues(x: -contentSize.width * 0.4, y:contentSize.height * 0.4, scale: 1, opacity:0) , trigger: starAnimation) { content, value in
                                 content
                                     .offset(x: value.x, y: value.y)
                                     .scaleEffect(value.scale)
+                                    .opacity(value.opacity)
                             } keyframes: { _ in
                                 KeyframeTrack(\.x) {
                                     LinearKeyframe(-contentSize.width * 0.4, duration: 1)
-                                    LinearKeyframe(contentSize.width * 0.1, duration: 0.3, timingCurve: .easeIn)
+                                    LinearKeyframe(contentSize.width * 0.3, duration: 0.3, timingCurve: .easeIn)
                                 }
 
                                 KeyframeTrack(\.y){
@@ -199,7 +222,13 @@ struct OrangeView: View {
                                 
                                 KeyframeTrack(\.scale){
                                     LinearKeyframe(1, duration: 1)
-                                    LinearKeyframe(0.75, duration: 0.3, timingCurve: .easeIn)
+                                    LinearKeyframe(0.65, duration: 0.3, timingCurve: .easeIn)
+                                }
+                                
+                                KeyframeTrack(\.opacity) {
+                                    MoveKeyframe(1)
+                                    LinearKeyframe(1, duration: 1.2)
+                                    MoveKeyframe(0)
                                 }
                             }
                         
@@ -245,5 +274,5 @@ struct OrangeView: View {
 }
 
 #Preview {
-    OrangeView( starAnimation: .constant(false), showFruits: .constant(true),bgColor: .constant(0xFFD847), bottle: .constant("yellow"), images: .constant(["orange-1","image 1","orange-2","orange-3","orange"]))
+    OrangeView( starAnimation: .constant(false), showFruits: .constant(true), bottle: .constant("yellow"), images: .constant(["orange-1","image 1","orange-2","orange-3","orange"]))
 }

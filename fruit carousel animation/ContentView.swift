@@ -21,12 +21,15 @@ struct ContentView: View {
     
     var body: some View {
         GeometryReader { proxy in
-            VStack(spacing:0) {
+            ZStack(alignment: .top) {
                 ScrollView(.horizontal) {
                     HStack(spacing:0){
                         ZStack {
-                            OrangeView(starAnimation: $startYellowAnimation, showFruits: $showYellow,bgColor: .constant(0xFFD847), bottle: .constant("yellow"), images: .constant(["orange-1","image 1","orange-2","orange-3","orange"]))
+                            OrangeView(starAnimation: $startYellowAnimation, showFruits: $showYellow, bottle: .constant("yellow"), images: .constant(["orange-1","image 1","orange-2","orange-3","orange"]))
                                 .frame(width: proxy.size.width)
+                                .background(
+                                    LinearGradient(gradient: Gradient(colors: [showPurple ? Color(hex:0x6848C6): Color(hex: 0xFFD847), Color(hex: 0xFFD847), showGreen ? Color(hex:0x8EC648): Color(hex: 0xFFD847) ]), startPoint: .leading, endPoint: .trailing)
+                                )
                                 .onScrollVisibilityChange { val in
                                     startYellowAnimation = val
                                     showYellow = val
@@ -35,8 +38,11 @@ struct ContentView: View {
                         .zIndex(showYellow ? 1:0)
                         
                         ZStack {
-                            OrangeView(starAnimation: $startGreenAnimation, showFruits: $showGreen, bgColor: .constant(0x8EC648), bottle: .constant("green"), images: .constant(["pngwing 2","pngwing 1","pngwing 3-1","pngwing 4","pngwing 3"]) )
+                            OrangeView(starAnimation: $startGreenAnimation, showFruits: $showGreen, bottle: .constant("green"), images: .constant(["pngwing 2","pngwing 1","pngwing 3-1","pngwing 4","pngwing 3"]) )
                                 .frame(width: proxy.size.width)
+                                .background(
+                                    LinearGradient(gradient: Gradient(colors: [showYellow ? Color(hex:0xFFD847): Color(hex: 0x8EC648), Color(hex: 0x8EC648), showPurple ? Color(hex:0x6848C6): Color(hex: 0x8EC648) ]), startPoint: .leading, endPoint: .trailing)
+                                )
                                 .background(
                                     GeometryReader { innerProxy in
                                         Color.clear
@@ -91,8 +97,11 @@ struct ContentView: View {
                         .zIndex(showGreen ? 1:0)
                         
                         ZStack {
-                            OrangeView(starAnimation: $startPurpleAnimation, showFruits: $showPurple, bgColor: .constant(0x6848C6), bottle: .constant("purple"), images: .constant(["pngwing 8","bbary 1","pngwing 5","pngwing 7","pngwing 6"]) )
+                            OrangeView(starAnimation: $startPurpleAnimation, showFruits: $showPurple, bottle: .constant("purple"), images: .constant(["pngwing 8","bbary 1","pngwing 5","pngwing 7","pngwing 6"]) )
                                 .frame(width: proxy.size.width)
+                                .background(
+                                    LinearGradient(gradient: Gradient(colors: [showGreen ? Color(hex:0x8EC648): Color(hex: 0x6848C6), Color(hex: 0x6848C6), showYellow ? Color(hex:0xFFD847): Color(hex: 0x6848C6) ]), startPoint: .leading, endPoint: .trailing)
+                                )
                                 .onScrollVisibilityChange { val in
                                     startPurpleAnimation = val
                                     showPurple = val
@@ -105,6 +114,12 @@ struct ContentView: View {
                 .scrollClipDisabled()
                 .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
                 
+                VStack{
+                    HeaderView()
+                    Spacer()
+                }
+                .padding(.vertical, 10)
+                .frame(width: proxy.size.width, height: proxy.size.height)
             }
             .ignoresSafeArea()
         }
