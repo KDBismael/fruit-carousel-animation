@@ -120,6 +120,15 @@ struct ContentView: View {
                 }
                 .padding(.vertical, 10)
                 .frame(width: proxy.size.width, height: proxy.size.height)
+                
+                HStack(spacing:24){
+                    NavigationItemView(isActive:$startYellowAnimation, image: .constant("yellow-icon"))
+                    
+                    NavigationItemView(isActive:$startGreenAnimation, image: .constant("green-icon"))
+                    
+                    NavigationItemView(isActive:$startPurpleAnimation, image: .constant("purple-icon"))
+                }
+                .position(x:proxy.size.width/2, y: proxy.size.height)
             }
             .ignoresSafeArea()
         }
@@ -138,4 +147,21 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+}
+
+struct NavigationItemView: View {
+    @Binding var isActive:Bool
+    @Binding var image:String
+    
+    var body: some View {
+        VStack{
+            Image(image)
+                .resizable()
+                .scaledToFit()
+                .frame(width:isActive ? 48 : 24, height: isActive ? 48 : 24)
+        }
+        .frame(width:isActive ? 54 : 24, height: isActive ? 54 : 24)
+        .background(.white)
+        .clipShape(Circle())
+    }
 }
